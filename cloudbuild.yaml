@@ -9,8 +9,6 @@ steps:
     secretEnv: ['KEY', 'CRT']
     args:
       - build
-      - '--platform'
-      - 'linux/arm64'
       - '--build-arg'
       - 'ARG_KEY=$$KEY'
       - '--build-arg'
