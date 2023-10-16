@@ -18,6 +18,6 @@ ENV CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUNNER="qemu-aarch64 -L /usr/aarch64
 
 RUN rustup default nightly && rustup target add aarch64-unknown-linux-musl && rustup component add --target aarch64-unknown-linux-musl rust-src rustc-dev && cargo +nightly build -Zbuild-std --release --bin sol --target aarch64-unknown-linux-musl
 
-EXPOSE 0.0.0.0:13127
+EXPOSE 13127
 
 CMD ["./target/release/sol"]
