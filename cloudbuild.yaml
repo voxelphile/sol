@@ -5,19 +5,15 @@ availableSecrets:
   - versionName: projects/voxelphile/secrets/voxelphile_github/versions/latest
     env: 'GITHUB_KEY'
 steps:
-  - name: 'marketplace.gcr.io/google/debian11'
-    secretEnv: ['SSH_KEY', 'GITHUB_KEY']
+  - name: 'gcr.io/cloud-builders/git'
+    secretEnv: ['SSH_KEY']
     entrypoint: 'bash'
     args:
     - -c
     - |
-      apt-get update && apt-get -y install expect git openssh-server
       echo "$$SSH_KEY" >> /root/.ssh/id_rsa
       chmod 400 /root/.ssh/id_rsa
-      echo "$$GITHUB_KEY" >> /root/.ssh/known_hosts.github
-      cp /root/.ssh/known_hosts.github /root/.ssh/known_hosts
-      eval `ssh-agent -s`
-      expect -c 'spawn ssh-add /home/user/.ssh/id_rsa\nexpect "Enter passphrase for /home/user/.ssh/id_rsa:"\nsend "\n";\nexpect "Identity added: /home/user/.ssh/id_rsa (/home/user/.ssh/id_rsa)"\ninteract'
+      echo "$$GITHUB_KEY" > /root/.ssh/known_hosts
     volumes:
     - name: 'ssh'
       path: /root/.ssh
