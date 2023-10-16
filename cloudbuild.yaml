@@ -18,8 +18,13 @@ steps:
     - name: 'ssh'
       path: /root/.ssh
   - name: gcr.io/cloud-builders/docker
+    secretEnv: ['SSH_KEY', 'GITHUB_KEY']
     args:
       - build
+      - '--build-arg'
+      - 'ARG_SSH_KEY=$$SSH_KEY'
+      - '--build-arg'
+      - 'ARG_GITHUB_KEY=$$GITHUB_KEY'
       - '-t'
       - '$_IMAGE_NAME:$COMMIT_SHA'
       - .
