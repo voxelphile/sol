@@ -15,6 +15,8 @@ steps:
       chmod 400 /root/.ssh/id_rsa
       echo "$$GITHUB_KEY" >> known_hosts.github
       cp known_hosts.github /root/.ssh/known_hosts
+      ssh-add -l
+      ssh-agent
     volumes:
     - name: 'ssh'
       path: /root/.ssh
