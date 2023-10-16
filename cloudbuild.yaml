@@ -8,7 +8,9 @@ steps:
   - name: gcr.io/cloud-builders/docker
     secretEnv: ['KEY', 'CRT']
     args:
-      - build
+      - buildx
+      - '--platform' 
+      - 'linux/arm64
       - '--build-arg'
       - 'ARG_KEY=$$KEY'
       - '--build-arg'
