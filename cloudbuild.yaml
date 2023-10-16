@@ -21,7 +21,7 @@ steps:
       - 'ARG_CRT=$$CRT'
       - '-t'
       - >-
-        $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
+        $_IMAGE_PATH:$COMMIT_SHA
       - .
       - '-f'
       - $_DOCKERFILE_NAME
@@ -31,14 +31,14 @@ steps:
     args:
       - push
       - >-
-        $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
+        $_IMAGE_PATH:$COMMIT_SHA
     id: Push
   - name: gcr.io/cloud-builders/gke-deploy
     args:
       - prepare
       - '--filename=$_K8S_YAML_PATH'
       - >-
-        --image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
+        --image=$_IMAGE_PATH:$COMMIT_SHA
       - '--app=$_K8S_APP_NAME'
       - '--version=$COMMIT_SHA'
       - '--namespace=$_K8S_NAMESPACE'
@@ -71,12 +71,13 @@ steps:
     id: Apply deploy
 images:
   - >-
-    $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
+    $_IMAGE_PATH:$COMMIT_SHA
 options:
   substitutionOption: ALLOW_LOOSE
   pool:
     name: 'projects/voxelphile/locations/us-central1/workerPools/worker-pool'
 substitutions:
+  _IMAGE_PATH: gcr.io/voxelphile/github.com/voxelphile/solE:$COMMIT_SHA
   _K8S_ANNOTATIONS: gcb-trigger-id=b2e7e9e2-7414-41eb-9f9b-9898fbf5b74f
   _GKE_CLUSTER: albert-einstein
   _OUTPUT_BUCKET_PATH: voxelphile_cloudbuild/deploy
