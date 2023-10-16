@@ -15,9 +15,8 @@ steps:
       chmod 400 /root/.ssh/id_rsa
       echo "$$GITHUB_KEY" >> known_hosts.github
       cp known_hosts.github /root/.ssh/known_hosts
-      echo "" > ~/.print_ssh_password && chmod 700 ~/.print_ssh_password
       eval `ssh-agent -s`
-      echo '' | SSH_ASKPASS=~/.print_ssh_password DISPLAY= ssh-add -
+      ssh-add /root/.ssh/id_rsa < ''
     volumes:
     - name: 'ssh'
       path: /root/.ssh
