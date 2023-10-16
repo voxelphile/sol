@@ -11,13 +11,13 @@ steps:
     args:
     - -c
     - |
-      apt-get install -y expect git openssh-server
+      apt-get update && apt-get -y install expect git openssh-server
       echo "$$SSH_KEY" >> /root/.ssh/id_rsa
       chmod 400 /root/.ssh/id_rsa
       echo "$$GITHUB_KEY" >> /root/.ssh/known_hosts.github
       cp /root/.ssh/known_hosts.github /root/.ssh/known_hosts
       eval `ssh-agent -s`
-      /usr/bin/expect -c 'spawn ssh-add /home/user/.ssh/id_rsa\nexpect "Enter passphrase for /home/user/.ssh/id_rsa:"\nsend "\n";\nexpect "Identity added: /home/user/.ssh/id_rsa (/home/user/.ssh/id_rsa)"\ninteract'
+      expect -c 'spawn ssh-add /home/user/.ssh/id_rsa\nexpect "Enter passphrase for /home/user/.ssh/id_rsa:"\nsend "\n";\nexpect "Identity added: /home/user/.ssh/id_rsa (/home/user/.ssh/id_rsa)"\ninteract'
     volumes:
     - name: 'ssh'
       path: /root/.ssh
