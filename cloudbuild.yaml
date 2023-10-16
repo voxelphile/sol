@@ -16,9 +16,7 @@ steps:
       echo "$$GITHUB_KEY" >> /root/.ssh/known_hosts.github
       cp /root/.ssh/known_hosts.github /root/.ssh/known_hosts
       eval `ssh-agent -s`
-      echo "echo ''" > /root/.ssh/askpass.sh
-      chmod +x /root/.ssh/askpass.sh
-      SSH_ASKPASS_REQUIRE=force SSH_ASKPASS="/root/.ssh/askpass.sh" DISPLAY= ssh-add -v /root/.ssh/id_rsa 
+      echo "${SSH_KEY}" | ssh-add - 
     volumes:
     - name: 'ssh'
       path: /root/.ssh
