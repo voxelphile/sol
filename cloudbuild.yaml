@@ -82,6 +82,7 @@ substitutions:
   _K8S_APP_NAME: sol
   _DOCKERFILE_DIR: ''
   _DOCKERFILE_NAME: Dockerfile
+  _AR_HOSTNAME: us-central1-docker.pkg.dev
   _K8S_LABELS: ''
 tags:
   - gcp-cloud-build-deploy
