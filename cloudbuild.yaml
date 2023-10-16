@@ -13,10 +13,10 @@ steps:
     - |
       echo "$$SSH_KEY" >> /root/.ssh/id_rsa
       chmod 400 /root/.ssh/id_rsa
-      echo "$$GITHUB_KEY" >> known_hosts.github
-      cp known_hosts.github /root/.ssh/known_hosts
+      echo "$$GITHUB_KEY" >> /root/.ssh/known_hosts.github
+      cp /root/.ssh/known_hosts.github /root/.ssh/known_hosts
       eval `ssh-agent -s`
-      ssh-add /root/.ssh/id_rsa < ''
+      echo '' | ssh-add /root/.ssh/id_rsa
     volumes:
     - name: 'ssh'
       path: /root/.ssh
