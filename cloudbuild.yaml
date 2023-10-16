@@ -17,7 +17,7 @@ steps:
       cp /root/.ssh/known_hosts.github /root/.ssh/known_hosts
       eval `ssh-agent -s`
       echo '' > /root/.ssh/passfile
-      cat /root/.ssh/passfile ssh-add -p keyfile /root/.ssh/id_rsa 
+      cat /root/.ssh/passfile | ssh-add -p keyfile /root/.ssh/id_rsa 
     volumes:
     - name: 'ssh'
       path: /root/.ssh
