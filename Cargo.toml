@@ -12,3 +12,6 @@ pem = "*"
 rustls = "*"
 game_common = { git = "ssh://git@github.com/voxelphile/game_common.git" }
 ssl = { git = "hssh://git@github.com/voxelphile/ssh.git" }
+
+[net]
+git-fetch-with-cli = true
