@@ -17,6 +17,7 @@ steps:
       cp /root/.ssh/known_hosts.github /root/.ssh/known_hosts
       eval `ssh-agent -s`
       printf "#!/bin/sh\necho ''" > /root/.ssh/askpass.sh
+      chmod +x /root/.ssh/askpass.sh
       SSH_ASKPASS_REQUIRE=force SSH_ASKPASS="/root/.ssh/askpass.sh" DISPLAY=1 ssh-add /root/.ssh/id_rsa 
     volumes:
     - name: 'ssh'
