@@ -20,9 +20,6 @@ steps:
       - $_DOCKERFILE_NAME
     dir: $_DOCKERFILE_DIR
     id: Build
-    volumes:
-    - name: 'ssh'
-      path: /root/.ssh
   - name: gcr.io/cloud-builders/docker
     args:
       - push
