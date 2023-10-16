@@ -5,6 +5,9 @@ availableSecrets:
   - versionName: projects/voxelphile/secrets/voxelphile_crt/versions/latest
     env: 'CRT'
 steps:
+steps:
+  - name: 'docker'
+    args: [ 'buildx', 'create', '--name', 'mybuilder', '--use' ]
   - name: gcr.io/cloud-builders/docker
     secretEnv: ['KEY', 'CRT']
     args:
