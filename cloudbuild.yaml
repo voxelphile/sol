@@ -77,7 +77,7 @@ options:
   pool:
     name: 'projects/voxelphile/locations/us-central1/workerPools/worker-pool'
 substitutions:
-  _IMAGE_PATH: gcr.io/voxelphile/github.com/voxelphile/solE:$COMMIT_SHA
+  _IMAGE_PATH: gcr.io/voxelphile/github.com/voxelphile/sol
   _K8S_ANNOTATIONS: gcb-trigger-id=b2e7e9e2-7414-41eb-9f9b-9898fbf5b74f
   _GKE_CLUSTER: albert-einstein
   _OUTPUT_BUCKET_PATH: voxelphile_cloudbuild/deploy
