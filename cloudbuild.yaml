@@ -2,7 +2,7 @@ availableSecrets:
   secretManager:
   - versionName: projects/voxelphile/secrets/voxelphile_ssh/versions/latest
     env: 'SSH_KEY'
-    - versionName: projects/voxelphile/secrets/voxelphile_github/versions/latest
+  - versionName: projects/voxelphile/secrets/voxelphile_github/versions/latest
     env: 'GITHUB_KEY'
 steps:
   - name: 'gcr.io/cloud-builders/git'
