@@ -10,7 +10,7 @@ steps:
     args:
       - buildx
       - '--platform' 
-      - 'linux/arm64
+      - 'linux/arm64'
       - '--build-arg'
       - 'ARG_KEY=$$KEY'
       - '--build-arg'
