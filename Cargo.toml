@@ -10,5 +10,5 @@ tokio = { version = "1.33.0", features = ["full"] }
 quinn = "*"
 pem = "*"
 rustls = "*"
-game_common = { git = "ssh://git@example.com/voxelphile/game_common.git" }
-ssl = { git = "hssh://git@example.com/voxelphile/ssh.git" }
+game_common = { git = "ssh://git@github.com/voxelphile/game_common.git" }
+ssl = { git = "hssh://git@github.com/voxelphile/ssh.git" }
