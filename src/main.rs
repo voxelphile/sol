@@ -10,8 +10,8 @@ const CRT: &'static str = env!("CRT");
 async fn main() {
     let server_addr = "0.0.0.0:13127".parse().unwrap();
 
-    let private_key = rustls::PrivateKey(KEY.as_bytes()).unwrap().contents().to_vec();
-    let certificate = vec![rustls::Certificate(CRT.as_bytes()).unwrap().contents().to_vec()];
+    let private_key = rustls::PrivateKey(KEY.as_bytes().to_vec());
+    let certificate = vec![rustls::Certificate(CRT.as_bytes().to_vec())];
 
     let mut server_config = ServerConfig::with_single_cert(certificate, private_key).unwrap();
     //yo
@@ -43,7 +43,7 @@ async fn main() {
                     };
 
                     match message {
-                        Message::Ping => { println!("recv ping, send pong"); send_stream.write(&Message::Pong.to_bytes()) },
+                        Message::Ping => { println!("recv ping, send pong"); send_stream.write(&Message::Pong.to_bytes()); },
                         _ => continue
                     }
                 }
