@@ -9,6 +9,7 @@ steps:
     secretEnv: ['KEY', 'CRT']
     args:
       - buildx
+      - 'build'
       - '--platform' 
       - 'linux/arm64'
       - '--build-arg'
