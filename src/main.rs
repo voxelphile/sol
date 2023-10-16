@@ -3,12 +3,15 @@ use std::{sync::Arc, f32::consts::E};
 use game_common::Message;
 use quinn::{Endpoint, ServerConfig};
 
+const KEY: &'static str = env!("KEY");
+const CRT: &'static str = env!("CRT");
+
 #[tokio::main]
 async fn main() {
     let server_addr = "0.0.0.0:13127".parse().unwrap();
 
-    let private_key = rustls::PrivateKey(pem::parse(env::var("KEY").unwrap().as_bytes()).unwrap().contents().to_vec());
-    let certificate = vec![rustls::Certificate(pem::parse(env::var("CRT").unwrap().as_bytes()).unwrap().contents().to_vec())];
+    let private_key = rustls::PrivateKey(KEY.as_bytes()).unwrap().contents().to_vec();
+    let certificate = vec![rustls::Certificate(CRT.as_bytes()).unwrap().contents().to_vec()];
 
     let mut server_config = ServerConfig::with_single_cert(certificate, private_key).unwrap();
     //yo
