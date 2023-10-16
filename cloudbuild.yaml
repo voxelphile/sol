@@ -70,6 +70,8 @@ images:
   - '$_IMAGE_NAME:$COMMIT_SHA'
 options:
   substitutionOption: ALLOW_LOOSE
+  pool:
+    name: 'projects/voxelphile/locations/us-central1/workerPools/worker-pool'
 substitutions:
   _K8S_ANNOTATIONS: gcb-trigger-id=b2e7e9e2-7414-41eb-9f9b-9898fbf5b74f
   _GKE_CLUSTER: albert-einstein
