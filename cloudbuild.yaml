@@ -5,18 +5,6 @@ availableSecrets:
   - versionName: projects/voxelphile/secrets/voxelphile_github/versions/latest
     env: 'GITHUB_KEY'
 steps:
-  - name: 'gcr.io/cloud-builders/git'
-    secretEnv: ['SSH_KEY', 'GITHUB_KEY']
-    entrypoint: 'bash'
-    args:
-    - -c
-    - |
-      echo "$$SSH_KEY" >> /root/.ssh/id_rsa
-      chmod 400 /root/.ssh/id_rsa
-      echo "$$GITHUB_KEY" > /root/.ssh/known_hosts
-    volumes:
-    - name: 'ssh'
-      path: /root/.ssh
   - name: gcr.io/cloud-builders/docker
     secretEnv: ['SSH_KEY', 'GITHUB_KEY']
     args:
