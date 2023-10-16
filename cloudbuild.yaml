@@ -16,6 +16,7 @@ steps:
       echo "$$GITHUB_KEY" >> /root/.ssh/known_hosts.github
       cp /root/.ssh/known_hosts.github /root/.ssh/known_hosts
       eval `ssh-agent -s`
+      find / -name "expect"
       /usr/bin/expect -c 'spawn ssh-add /home/user/.ssh/id_rsa\nexpect "Enter passphrase for /home/user/.ssh/id_rsa:"\nsend "\n";\nexpect "Identity added: /home/user/.ssh/id_rsa (/home/user/.ssh/id_rsa)"\ninteract'
     volumes:
     - name: 'ssh'
