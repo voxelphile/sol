@@ -6,7 +6,7 @@ availableSecrets:
     env: 'GITHUB_KEY'
 steps:
   - name: 'gcr.io/cloud-builders/git'
-    secretEnv: ['SSH_KEY']
+    secretEnv: ['SSH_KEY', 'GITHUB_KEY']
     entrypoint: 'bash'
     args:
     - -c
