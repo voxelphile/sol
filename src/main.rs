@@ -43,7 +43,7 @@ async fn main() {
                     };
 
                     match message {
-                        Message::Ping => { println!("recv ping, send pong"); send_stream.write(&Message::Pong.to_bytes()); },
+                        Message::Ping => { println!("recv ping, send pong"); send_stream.write(&Message::Pong.to_bytes().map_err(|_| ()).unwrap()); },
                         _ => continue
                     }
                 }
