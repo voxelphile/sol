@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sol
+  labels:
+    name: sol
+---
+apiVersion: "apps/v1"
+kind: Deployment
+metadata:
+  name: sol
+  namespace: sol
+  labels:
+    app: sol
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sol
+  template:
+    metadata:
+      labels:
+        app: sol
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: peach
+      containers:
+        - image: gcr.io/voxelphile/github.com/voxelphile/sol
+          imagePullPolicy: IfNotPresent
+          name: sol-sha256-1
+          envFrom:
+            - configMapRef:
+                name: sol-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sol
+  namespace: sol
+  labels:
+    app: sol
+spec:
+  clusterIP: 10.76.2.0
+  ports:
+  - name: sol
+    port: 13127
+    protocol: UDP
+    targetPort: 13127
+  selector:
+    app: sol
+  type: ClusterIP
