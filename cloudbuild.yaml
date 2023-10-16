@@ -20,7 +20,8 @@ steps:
       - '--build-arg'
       - 'ARG_CRT=$$CRT'
       - '-t'
-      - '$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+      - >-
+        $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - .
       - '-f'
       - $_DOCKERFILE_NAME
@@ -29,13 +30,15 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - '$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+      - >-
+        $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
     id: Push
   - name: gcr.io/cloud-builders/gke-deploy
     args:
       - prepare
       - '--filename=$_K8S_YAML_PATH'
-      - '--image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+      - >-
+        --image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - '--app=$_K8S_APP_NAME'
       - '--version=$COMMIT_SHA'
       - '--namespace=$_K8S_NAMESPACE'
@@ -67,7 +70,8 @@ steps:
       - '--namespace=$_K8S_NAMESPACE'
     id: Apply deploy
 images:
-  - '$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+  - >-
+    $_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
 options:
   substitutionOption: ALLOW_LOOSE
   pool:
