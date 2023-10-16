@@ -610,7 +610,6 @@ dependencies = [
  "pem",
  "quinn",
  "rustls",
- "ssl",
  "tokio",
 ]
 
@@ -619,11 +618,6 @@ name = "spin"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6e63cff320ae2c57904679ba7cb63280a3dc4613885beafb148ee7bf9aa9042d"
-
-[[package]]
-name = "ssl"
-version = "0.1.0"
-source = "git+https://github.com/voxelphile/ssl.git#9b96e73ae3873d25e4c4e89863fc1a0675c8e5e6"
 
 [[package]]
 name = "syn"
