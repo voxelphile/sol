@@ -1,18 +1,18 @@
 availableSecrets:
   secretManager:
-  - versionName: projects/voxelphile/secrets/voxelphile_ssh/versions/latest
-    env: 'SSH_KEY'
-  - versionName: projects/voxelphile/secrets/voxelphile_github/versions/latest
-    env: 'GITHUB_KEY'
+  - versionName: projects/voxelphile/secrets/voxelphile_key/versions/latest
+    env: 'KEY'
+  - versionName: projects/voxelphile/secrets/voxelphile_crt/versions/latest
+    env: 'CRT'
 steps:
   - name: gcr.io/cloud-builders/docker
-    secretEnv: ['SSH_KEY', 'GITHUB_KEY']
+    secretEnv: ['KEY', 'CRT']
     args:
       - build
       - '--build-arg'
-      - 'ARG_SSH_KEY=$$SSH_KEY'
+      - 'ARG_KEY=$$KEY'
       - '--build-arg'
-      - 'ARG_GITHUB_KEY=$$GITHUB_KEY'
+      - 'ARG_CRT=$$CRT'
       - '-t'
       - '$_IMAGE_NAME:$COMMIT_SHA'
       - .

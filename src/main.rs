@@ -7,8 +7,8 @@ use quinn::{Endpoint, ServerConfig};
 async fn main() {
     let server_addr = "0.0.0.0:13127".parse().unwrap();
 
-    let private_key = rustls::PrivateKey(pem::parse(ssl::PRIVATE_KEY).unwrap().contents().to_vec());
-    let certificate = vec![rustls::Certificate(pem::parse(ssl::CERTIFICATE).unwrap().contents().to_vec())];
+    let private_key = rustls::PrivateKey(pem::parse(env::var("KEY").unwrap().as_bytes()).unwrap().contents().to_vec());
+    let certificate = vec![rustls::Certificate(pem::parse(env::var("CRT").unwrap().as_bytes()).unwrap().contents().to_vec())];
 
     let mut server_config = ServerConfig::with_single_cert(certificate, private_key).unwrap();
     //yo
