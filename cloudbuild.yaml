@@ -16,7 +16,7 @@ steps:
       echo "$$GITHUB_KEY" >> /root/.ssh/known_hosts.github
       cp /root/.ssh/known_hosts.github /root/.ssh/known_hosts
       eval `ssh-agent -s`
-      printf "\n" | ssh-add -v /root/.ssh/id_rsa
+      echo | ssh-add -v /root/.ssh/id_rsa
     volumes:
     - name: 'ssh'
       path: /root/.ssh
