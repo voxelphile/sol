@@ -23,6 +23,7 @@ spec:
         app: sol
     spec:
       nodeSelector:
+        kubernetes.io/arch: arm64
         cloud.google.com/gke-nodepool: peach
       containers:
         - image: gcr.io/voxelphile/github.com/voxelphile/sol
