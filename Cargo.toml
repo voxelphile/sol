@@ -10,4 +10,5 @@ tokio = { version = "1.33.0", features = ["full"] }
 quinn = "*"
 pem = "*"
 rustls = "*"
-game_common = { path = "../game_common" }
+game_common = { git = "https://github.com/voxelphile/game_common.git" }
+ssl = { git = "https://github.com/voxelphile/ssl.git" }

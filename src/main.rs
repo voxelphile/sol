@@ -3,16 +3,12 @@ use std::{sync::Arc, f32::consts::E};
 use game_common::Message;
 use quinn::{Endpoint, ServerConfig};
 
-
-const PRIVATE_KEY: &'static str = include_str!("../ssl/voxelphile.key");
-const CERTIFICATE: &'static str = include_str!("../ssl/voxelphile.crt");
-
 #[tokio::main]
 async fn main() {
     let server_addr = "0.0.0.0:13127".parse().unwrap();
 
-    let private_key = rustls::PrivateKey(pem::parse(PRIVATE_KEY).unwrap().contents().to_vec());
-    let certificate = vec![rustls::Certificate(pem::parse(CERTIFICATE).unwrap().contents().to_vec())];
+    let private_key = rustls::PrivateKey(pem::parse(ssl::PRIVATE_KEY).unwrap().contents().to_vec());
+    let certificate = vec![rustls::Certificate(pem::parse(ssl::CERTIFICATE).unwrap().contents().to_vec())];
 
     let mut server_config = ServerConfig::with_single_cert(certificate, private_key).unwrap();
 
