@@ -69,6 +69,7 @@ steps:
       - '--location=$_GKE_LOCATION'
       - '--namespace=$_K8S_NAMESPACE'
     id: Apply deploy
+    
 images:
   - >-
     $_IMAGE_PATH:$COMMIT_SHA
