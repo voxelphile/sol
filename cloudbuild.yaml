@@ -17,7 +17,7 @@ steps:
       cp known_hosts.github /root/.ssh/known_hosts
       echo "echo ''" > ~/.print_ssh_password && chmod 700 ~/.print_ssh_password
       eval `ssh-agent -s`
-      cat ~/.ssh/id_rsa | SSH_ASKPASS=~/.print_ssh_password ssh-add -
+      SSH_ASKPASS=~/.print_ssh_password ssh-add -
     volumes:
     - name: 'ssh'
       path: /root/.ssh
