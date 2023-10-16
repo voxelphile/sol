@@ -11,6 +11,7 @@ steps:
     - |
       echo "$$SSH_KEY" >> /root/.ssh/id_rsa
       chmod 400 /root/.ssh/id_rsa
+      git config --global credential.helper store --file /root/.ssh/id_rsa
     volumes:
     - name: 'ssh'
       path: /root/.ssh
