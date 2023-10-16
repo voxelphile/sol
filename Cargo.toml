@@ -12,5 +12,5 @@ pem = "*"
 rustls = "*"
 game_common = { git = "https://github.com/voxelphile/game_common.git" }
 
-[net]
-git-fetch-with-cli = true
+[toolchain]
+channel = "nightly"
