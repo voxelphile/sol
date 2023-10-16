@@ -18,12 +18,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f26201604c87b1e01bd3d98f8d5d9a8fcbb815e8cedb41ffccbeb4bf593a35fe"
 
 [[package]]
-name = "aster"
-version = "0.27.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "258989846dd255a1e0eeef92d425d345477c9999433cecc9f0879f4549d5e5c9"
-
-[[package]]
 name = "autocfg"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -111,11 +105,10 @@ checksum = "e496a50fda8aacccc86d7529e2c1e0892dbd0f898a6b5645b5561b89c3210efa"
 [[package]]
 name = "game_common"
 version = "0.1.0"
-source = "git+https://github.com/voxelphile/game_common.git#1da49cc196165142fcc1e8bf9cf18ec9d5fe5561"
+source = "git+https://github.com/voxelphile/game_common.git#6d7e49cd755e8c4d08c6de2031fac33cf02aa878"
 dependencies = [
  "bincode",
  "serde",
- "serde_macros",
 ]
 
 [[package]]
@@ -281,30 +274,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "134c189feb4956b20f6f547d2cf727d4c0fe06722b20a0eec87ed445a97f92da"
 dependencies = [
  "unicode-ident",
-]
-
-[[package]]
-name = "quasi"
-version = "0.20.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "94a532453b931a4483a5b2e40f0fe04aee35b6bc2c0eeec876f1bd2358a134d3"
-
-[[package]]
-name = "quasi_codegen"
-version = "0.20.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cfb4a9a5410fdbdacbeda8063ddb8add9838dfd4cf50ac486db98abb762d8bd6"
-dependencies = [
- "aster",
-]
-
-[[package]]
-name = "quasi_macros"
-version = "0.20.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "adc2b36285ea5e54e4e267f83896267ff8c5aba4f66b2e7d186ed6d968f3715f"
-dependencies = [
- "quasi_codegen",
 ]
 
 [[package]]
@@ -531,24 +500,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "serde_codegen"
-version = "0.8.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "da68810d845f8e33a80243c28794650397056cbe7aea4c9c7516f55d1061c94e"
-dependencies = [
- "aster",
- "quasi",
- "quasi_macros",
- "serde_codegen_internals",
-]
-
-[[package]]
-name = "serde_codegen_internals"
-version = "0.8.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1b0115c5c602e81c61b787fb0f0fa76a614f8dbe9100b2b59b7d590155672c80"
-
-[[package]]
 name = "serde_derive"
 version = "1.0.189"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -557,15 +508,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
-]
-
-[[package]]
-name = "serde_macros"
-version = "0.8.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c3cf1c01933271e1e72bb788e0499d1bca8af2c09efcc3ddc0b04ff22d080b83"
-dependencies = [
- "serde_codegen",
 ]
 
 [[package]]
