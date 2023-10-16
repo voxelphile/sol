@@ -11,10 +11,11 @@ steps:
     args:
     - -c
     - |
-      echo "$SSH_KEY" >> /root/.ssh/id_rsa
+      echo "$$SSH_KEY" >> /root/.ssh/id_rsa
       chmod 400 /root/.ssh/id_rsa
-      echo "$GITHUB_KEY" >> known_hosts.github
+      echo "$$GITHUB_KEY" >> known_hosts.github
       cp known_hosts.github /root/.ssh/known_hosts
+      git config --global url."ssh://".insteadOf https://
     volumes:
     - name: 'ssh'
       path: /root/.ssh
