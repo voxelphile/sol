@@ -17,7 +17,7 @@ steps:
       cp /root/.ssh/known_hosts.github /root/.ssh/known_hosts
       eval `ssh-agent -s`
       echo '' > /usr/bin/ssh-askpass
-      echo 'AddKeysToAgent yes' >> ~/.ssh/config
+      echo 'AddKeysToAgent yes' > ~/.ssh/config
       cat ~/.ssh/config
       export SSH_ASKPASS=/usr/bin/ssh-askpass
       export SSH_ASKPASS_REQUIRE=prefer
