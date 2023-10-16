@@ -20,20 +20,19 @@ steps:
       - 'ARG_KEY=$$KEY'
       - '--build-arg'
       - 'ARG_CRT=$$CRT'
-      - '-t'
-      - >-
-        $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA
+      - '--tag'
+      - '$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA'
       - .
       - '-f'
       - $_DOCKERFILE_NAME
     dir: $_DOCKERFILE_DIR
     id: Build
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - push
-      - >-
-        $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA
-    id: Push
+  # - name: gcr.io/cloud-builders/docker
+  #   args:
+  #     - push
+  #     - >-
+  #       $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA
+  #   id: Push
   - name: gcr.io/cloud-builders/gke-deploy
     args:
       - prepare
