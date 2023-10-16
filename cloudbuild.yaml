@@ -29,6 +29,14 @@ steps:
     id: Build
   - name: gcr.io/cloud-builders/docker
     args:
+      - tag
+      - >-
+        $_IMAGE_PATH:$COMMIT_SHA
+      - >-
+        $_IMAGE_PATH:$COMMIT_SHA
+    id: Tag
+  - name: gcr.io/cloud-builders/docker
+    args:
       - push
       - >-
         $_IMAGE_PATH:$COMMIT_SHA
