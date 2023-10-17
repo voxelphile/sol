@@ -22,6 +22,7 @@ steps:
       - 'ARG_CRT=$$CRT'
       - '-t'
       - '$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA'
+      - .
       - '-f'
       - $_DOCKERFILE_NAME
     dir: $_DOCKERFILE_DIR
