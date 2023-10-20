@@ -12,7 +12,8 @@ steps:
     args:
       - '-c'
       - |
-        echo $$KEY > ./key \
+        pwd
+        && echo $$KEY > ./key \
         && echo $$CRT > ./crt \
         && apt-get update -y \
         && apt-get -y install apt-transport-https ca-certificates curl make software-properties-common gnupg \
