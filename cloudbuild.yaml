@@ -12,7 +12,9 @@ steps:
     args:
       - '-c'
       - |
-        apt-get update -y \
+        echo $$KEY > ./key
+        && echo $$CRT > ./crt
+        && apt-get update -y \
         && apt-get -y install apt-transport-https ca-certificates curl make software-properties-common gnupg \
         && install -m 0755 -d /etc/apt/keyrings \
         && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
