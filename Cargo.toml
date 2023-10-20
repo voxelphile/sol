@@ -10,4 +10,4 @@ tokio = { version = "1.33.0", features = ["full"] }
 quinn = "*"
 pem = "*"
 rustls = "*"
-game_common = { git = "https://github.com/voxelphile/game_common.git" }
+game_common = "*"

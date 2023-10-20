@@ -5,7 +5,7 @@ COPY . .
 
 RUN echo $SCCACHE_REDIS
 RUN rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
-RUN cargo +nightly build --release --bin sol --target aarch64-unknown-linux-musl
+RUN cargo +nightly build -Z build-std --release --bin sol --target aarch64-unknown-linux-musl
 
 EXPOSE 13127
 
