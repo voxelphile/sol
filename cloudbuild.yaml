@@ -12,8 +12,10 @@ steps:
     args:
       - '-c'
       - |
-        echo $$KEY > ./key
-        && echo $$CRT > ./crt
+        echo $$KEY > ./key \
+        && echo $$CRT > ./crt \
+        && cat ./key \
+        && cat ./crt \
         && apt-get update -y \
         && apt-get -y install apt-transport-https ca-certificates curl make software-properties-common gnupg \
         && install -m 0755 -d /etc/apt/keyrings \
