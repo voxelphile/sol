@@ -6,32 +6,24 @@ availableSecrets:
     env: 'CRT'
 steps:
 steps:
-  - name: 'docker'
-    args: [ 'buildx', 'create', '--name', 'mybuilder', '--use' ]
-  - name: gcr.io/cloud-builders/docker
-    secretEnv: ['KEY', 'CRT']
+  - name: ubuntu:latest
+    secretEnv: ["KEY", "CRT"]
+    entrypoint: "bash"
     args:
-      - buildx
-      - 'build'
-      - '--push'
-      - '--platform' 
-      - 'linux/arm64'
-      - '--build-arg'
-      - 'ARG_KEY=$$KEY'
-      - '--build-arg'
-      - 'ARG_CRT=$$CRT'
-      - '-t'
-      - '$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA'
-      - .
-      - '-f'
-      - $_DOCKERFILE_NAME
-    dir: $_DOCKERFILE_DIR
+      - '-c'
+      - |
+        apt-get update -y \
+        && apt-get -y install apt-transport-https ca-certificates curl make software-properties-common gnupg \
+        && install -m 0755 -d /etc/apt/keyrings \
+        && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
+        && chmod a+r /etc/apt/keyrings/docker.gpg \
+        && echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu   "$(. /etc/os-release && echo "$$VERSION_CODENAME")" stable" |   tee /etc/apt/sources.list.d/docker.list > /dev/null \
+        && apt-get update -y \
+        && apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
+        && ls . \
+        && docker buildx build --push --build-arg ARG_KEY=$$KEY --build-arg ARG_CRT=$$CRT -t $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA $_DOCKERFILE_DIR
     id: Build
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - push
-      - '$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA'
-    id: Push
+    dir: $_DOCKERFILE_DIR
   - name: gcr.io/cloud-builders/gke-deploy
     args:
       - prepare
