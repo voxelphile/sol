@@ -2,8 +2,11 @@ FROM us-central1-docker.pkg.dev/voxelphile/cloud-gke-source-deploy/rust:latest
 
 WORKDIR /usr/src/app
 COPY . .
+COPY /workspace/key ./key
+COPY /workspace/crt ./crt
 
 RUN echo $SCCACHE_REDIS
+RUN cat ./key
 RUN rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
 RUN cargo +nightly build -Z build-std --release --bin sol --target aarch64-unknown-linux-musl
 
