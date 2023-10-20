@@ -1,4 +1,4 @@
-FROM us-central1-docker.pkg.dev/voxelphile/cloud-gke-source-deploy/rust-arm64:latest
+FROM --platform=linux/arm64 us-central1-docker.pkg.dev/voxelphile/cloud-gke-source-deploy/rust-arm64:latest
 
 WORKDIR /usr/src/app
 COPY . .
