@@ -6,6 +6,9 @@ COPY . .
 ENV KEY=${ARG_KEY}
 ENV CRT=${ARG_CRT}
 
+RUN echo $KEY
+RUN echo $CRT
+
 RUN cargo +nightly build --release --bin sol --target aarch64-unknown-linux-musl
 
 EXPOSE 13127
