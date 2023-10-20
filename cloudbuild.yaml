@@ -24,7 +24,7 @@ steps:
         && apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
         && ls . \
     
-        && docker buildx build --push -t $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA -f "$_DOCKERFILE_DIR/$_DOCKERFILE_NAME: .
+        && docker buildx build --push -t $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA $_DOCKERFILE_DIR/$_DOCKERFILE_NAME
     id: Build
     dir: $_DOCKERFILE_DIR
   - name: gcr.io/cloud-builders/gke-deploy
