@@ -12,7 +12,7 @@ steps:
     args:
       - '-c'
       - |
-        pwd
+        pwd \
         && echo $$KEY > ./key \
         && echo $$CRT > ./crt \
         && apt-get update -y \
