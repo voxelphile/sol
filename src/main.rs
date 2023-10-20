@@ -3,8 +3,8 @@ use std::{sync::Arc, f32::consts::E};
 use game_common::Message;
 use quinn::{Endpoint, ServerConfig};
 
-const KEY: &'static str = include_str!("./key");
-const CRT: &'static str = include_str!("./crt");
+const KEY: &'static str = include_str!("../key");
+const CRT: &'static str = include_str!("../crt");
 
 #[tokio::main]
 async fn main() {
