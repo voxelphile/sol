@@ -1,2 +1,2 @@
-[buildt]
+[build]
 rustc-wrapper = "/usr/local/cargo/bin/sccache"
