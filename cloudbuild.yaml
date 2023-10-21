@@ -39,7 +39,7 @@ steps:
     args:
       - set
       - image
-      - deployment/$_K8S_APP_NAME
+      - deployment.apps/$_K8S_APP_NAME
       - $_K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA
     id: Deploy
     env:
