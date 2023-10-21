@@ -28,7 +28,7 @@ spec:
       containers:
         - image: gcr.io/voxelphile/github.com/voxelphile/sol
           imagePullPolicy: IfNotPresent
-          name: sol-sha256-1
+          name: sol
           envFrom:
             - configMapRef:
                 name: sol-config
