@@ -40,6 +40,8 @@ steps:
     - CLOUDSDK_COMPUTE_ZONE=$_GKE_LOCATION
     - CLOUDSDK_CONTAINER_CLUSTER=$_GKE_CLUSTER
     - _K8S_IMAGE=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA
+options:
+  machineType: 'E2_HIGHCPU_8'
 images:
   - >-
     $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA
