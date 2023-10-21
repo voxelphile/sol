@@ -26,12 +26,9 @@ spec:
         kubernetes.io/arch: arm64
         cloud.google.com/gke-nodepool: peach
       containers:
-        - image: gcr.io/voxelphile/github.com/voxelphile/sol
+        - image: $_K8S_IMAGE
           imagePullPolicy: IfNotPresent
           name: sol
-          envFrom:
-            - configMapRef:
-                name: sol-config
 ---
 apiVersion: v1
 kind: Service

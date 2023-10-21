@@ -26,23 +26,13 @@ steps:
         && docker buildx build --platform linux/arm64 --squash --push -t $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA /workspace/
     id: Build
     dir: $_DOCKERFILE_DIR
-  - name: gcr.io/cloud-builders/kubectl
-    args:
-      - apply 
-      - -f 
-      - /workspace/kubernetes
-    id: Apply
-    env:
-    - CLOUDSDK_COMPUTE_ZONE=$_GKE_LOCATION
-    - CLOUDSDK_CONTAINER_CLUSTER=$_GKE_CLUSTER
-  - name: gcr.io/cloud-builders/kubectl
-    args:
-      - --namespace=$_K8S_NAMESPACE
-      - set
-      - image
-      - deployment.apps/$_K8S_APP_NAME
-      - $_K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA
-    id: Deploy
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: "bash"
+      - -c
+      - |
+        export _K8S_IMAGE=$_K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA \
+        && for file in /workspace/kubernetes/*; do envsubst < file | kubectl apply -f - done
+    id: Apply / Deploy
     env:
     - CLOUDSDK_COMPUTE_ZONE=$_GKE_LOCATION
     - CLOUDSDK_CONTAINER_CLUSTER=$_GKE_CLUSTER
