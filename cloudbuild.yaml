@@ -32,6 +32,7 @@ steps:
       - -c
       - |
         apt-get install gettext-base -y \
+        && gcloud container clusters get-credentials albert-einstein --zone us-central1-a
         && for file in /workspace/kubernetes/*.yaml; do envsubst < $file | kubectl apply -f -; done
     id: Apply / Deploy
     env:
