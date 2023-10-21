@@ -5,7 +5,6 @@ availableSecrets:
   - versionName: projects/voxelphile/secrets/voxelphile_crt/versions/latest
     env: 'CRT'
 steps:
-steps:
   - name: ubuntu:latest
     secretEnv: ["KEY", "CRT"]
     entrypoint: "bash"
@@ -27,41 +26,19 @@ steps:
         && docker buildx build --platform linux/arm64 --push -t $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA /workspace/
     id: Build
     dir: $_DOCKERFILE_DIR
-  - name: gcr.io/cloud-builders/gke-deploy
+  - name: gcr.io/cloud-builders/kubectl
     args:
-      - prepare
-      - '--filename=$_K8S_YAML_PATH'
-      - '--image=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA'
-      - '--app=$_K8S_APP_NAME'
-      - '--version=$COMMIT_SHA'
-      - '--namespace=$_K8S_NAMESPACE'
-      - '--label=$_K8S_LABELS'
-      - '--annotation=$_K8S_ANNOTATIONS,gcb-build-id=$BUILD_ID'
-      - '--create-application-cr'
-      - >-
-        --links="Build
-        details=https://console.cloud.google.com/cloud-build/builds/$BUILD_ID?project=$PROJECT_ID"
-      - '--output=output'
-    id: Prepare deploy
-  - name: gcr.io/cloud-builders/gsutil
+      - apply 
+      - -f 
+      - /workspace/kubernetes
+    id: Apply
+  - name: gcr.io/cloud-builders/kubectl
     args:
-      - '-c'
-      - |-
-        if [ "$_OUTPUT_BUCKET_PATH" != "" ]
-        then
-          gsutil cp -r output/suggested gs://$_OUTPUT_BUCKET_PATH/config/$_K8S_APP_NAME/$BUILD_ID/suggested
-          gsutil cp -r output/expanded gs://$_OUTPUT_BUCKET_PATH/config/$_K8S_APP_NAME/$BUILD_ID/expanded
-        fi
-    id: Save configs
-    entrypoint: sh
-  - name: gcr.io/cloud-builders/gke-deploy
-    args:
-      - apply
-      - '--filename=output/expanded'
-      - '--cluster=$_GKE_CLUSTER'
-      - '--location=$_GKE_LOCATION'
-      - '--namespace=$_K8S_NAMESPACE'
-    id: Apply deploy
+      - set
+      - image
+      - deployment/$_K8S_APP_NAME
+      - $K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA
+    id: Deploy
 images:
   - >-
     $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA
