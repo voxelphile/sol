@@ -37,7 +37,7 @@ steps:
     env:
     - CLOUDSDK_COMPUTE_ZONE=$_GKE_LOCATION
     - CLOUDSDK_CONTAINER_CLUSTER=$_GKE_CLUSTER
-    = _K8S_IMAGE=$_K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA
+    - _K8S_IMAGE=$_K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA
 images:
   - >-
     $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA
