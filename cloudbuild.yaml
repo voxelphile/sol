@@ -32,6 +32,7 @@ steps:
       - -c
       - |
         apt-get update -y \
+        apt-get install gettext-base \
         && for file in /workspace/kubernetes/*.yaml; do envsubst < $file | kubectl apply -f -; done
     id: Apply / Deploy
     env:
