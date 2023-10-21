@@ -9,8 +9,11 @@ const CRT: &'static str = include_str!("../crt");
 #[tokio::main]
 async fn main() {
     let server_addr = "0.0.0.0:13127".parse().unwrap();
-
-    let private_key = rustls::PrivateKey(KEY.as_bytes().to_vec());
+    
+    let Some(rustls_pemfile::Item::PKCS8Key(key)) = rustls_pemfile::read_one(&mut KEY.as_bytes().to_vec().as_slice()).ok().flatten() else {
+        panic!("invalid private key");
+    };
+    let private_key = rustls::PrivateKey(key);
     let certificate = vec![rustls::Certificate(CRT.as_bytes().to_vec())];
 
     let mut server_config = ServerConfig::with_single_cert(certificate, private_key).unwrap();

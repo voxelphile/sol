@@ -105,7 +105,8 @@ checksum = "e496a50fda8aacccc86d7529e2c1e0892dbd0f898a6b5645b5561b89c3210efa"
 [[package]]
 name = "game_common"
 version = "0.1.0"
-source = "git+https://github.com/voxelphile/game_common.git#6d7e49cd755e8c4d08c6de2031fac33cf02aa878"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d34c3dc0a906d92b50c2733b6adaf94741c6dcc178e9fbe4be1ff4c8e9916bd5"
 dependencies = [
  "bincode",
  "serde",
@@ -552,6 +553,7 @@ dependencies = [
  "pem",
  "quinn",
  "rustls",
+ "rustls-pemfile",
  "tokio",
 ]
 
