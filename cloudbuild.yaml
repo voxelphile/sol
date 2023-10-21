@@ -33,7 +33,7 @@ steps:
       - -c
       - |
         export _K8S_IMAGE=$_K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA \
-        && for file in /workspace/kubernetes/*.yaml; do envsubst < file | kubectl apply -f -; done
+        && for file in /workspace/kubernetes/*.yaml; do envsubst < $file | kubectl apply -f -; done
     id: Apply / Deploy
     env:
     - CLOUDSDK_COMPUTE_ZONE=$_GKE_LOCATION
