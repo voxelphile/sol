@@ -37,7 +37,7 @@ steps:
     - CLOUDSDK_CONTAINER_CLUSTER=$_GKE_CLUSTER
   - name: gcr.io/cloud-builders/kubectl
     args:
-      - --namespace="$_K8S_NAMESPACE"
+      - --namespace=$_K8S_NAMESPACE
       - set
       - image
       - deployment.apps/$_K8S_APP_NAME
