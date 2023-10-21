@@ -31,7 +31,7 @@ steps:
     args:
       - -c
       - |
-        apt-get update -y 
+        apt-get update -y \
         && for file in /workspace/kubernetes/*.yaml; do envsubst < $file | kubectl apply -f -; done
     id: Apply / Deploy
     env:
