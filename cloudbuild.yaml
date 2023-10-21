@@ -12,9 +12,9 @@ steps:
       - '-c'
       - |
         echo $$KEY > ./key \
-        && printf "\n" >> ./key
+        && printf "\n" >> ./key \
         && echo $$CRT > ./crt \
-        && printf "\n" >> ./crt
+        && printf "\n" >> ./crt \
         && cat ./key \
         && apt-get update -y \
         && apt-get -y install apt-transport-https ca-certificates curl make software-properties-common gnupg \
