@@ -3,7 +3,7 @@ FROM --platform=linux/arm64 us-central1-docker.pkg.dev/voxelphile/cloud-gke-sour
 WORKDIR /usr/src/app
 COPY . .
 
-RUN cargo +nightly build --release --bin sol --target aarch64-unknown-linux-gnu
+RUN cargo +nightly build --release --bin sol
 
 EXPOSE 13127
 
