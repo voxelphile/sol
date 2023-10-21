@@ -10,11 +10,11 @@ const CRT: &'static str = include_str!("../crt");
 async fn main() {
     let server_addr = "0.0.0.0:13127".parse().unwrap();
     
-    let Some(rustls_pemfile::Item::PKCS8Key(key)) = dbg!(rustls_pemfile::read_one(&mut KEY.replace("\r\n", "\n").as_bytes().to_vec().as_slice())).ok().flatten() else {
+    let Some(rustls_pemfile::Item::PKCS8Key(key)) = dbg!(rustls_pemfile::read_one(&mut KEY.as_bytes().to_vec().as_slice())).ok().flatten() else {
         panic!("invalid private key");
     };
     let private_key = rustls::PrivateKey(key);
-    let certificate = vec![rustls::Certificate(CRT.replace("\r\n", "\n").as_bytes().to_vec())];
+    let certificate = vec![rustls::Certificate(CRT.as_bytes().to_vec())];
 
     let mut server_config = ServerConfig::with_single_cert(certificate, private_key).unwrap();
     //yo
