@@ -1,2 +1,2 @@
-[build]
+[target.'cfg(unix)'.build]
 rustc-wrapper = "/usr/local/cargo/bin/sccache"
