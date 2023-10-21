@@ -28,6 +28,7 @@ steps:
     dir: $_DOCKERFILE_DIR
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     entrypoint: "bash"
+    args:
       - -c
       - |
         export _K8S_IMAGE=$_K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA \
