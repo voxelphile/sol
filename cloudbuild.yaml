@@ -12,7 +12,6 @@ steps:
       - '-c'
       - |
         echo $$KEY > ./key \
-        && ls /workspace/kubernetes \
         && echo $$CRT > ./crt \
         && apt-get update -y \
         && apt-get -y install apt-transport-https ca-certificates curl make software-properties-common gnupg \
@@ -27,17 +26,18 @@ steps:
         && docker buildx build --platform linux/arm64 --squash --push -t $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA -t $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:latest /workspace/
     id: Build
     dir: $_DOCKERFILE_DIR
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  - name: google/cloud-sdk:latest
     entrypoint: "bash"
     args:
       - -c
       - |
-        export _K8S_IMAGE=$_K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA \
+        apt-get update -y 
         && for file in /workspace/kubernetes/*.yaml; do envsubst < $file | kubectl apply -f -; done
     id: Apply / Deploy
     env:
     - CLOUDSDK_COMPUTE_ZONE=$_GKE_LOCATION
     - CLOUDSDK_CONTAINER_CLUSTER=$_GKE_CLUSTER
+    = _K8S_IMAGE=$_K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA
 images:
   - >-
     $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA
