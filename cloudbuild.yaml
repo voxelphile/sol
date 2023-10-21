@@ -32,6 +32,9 @@ steps:
       - -f 
       - /workspace/kubernetes
     id: Apply
+    env:
+    - CLOUDSDK_COMPUTE_ZONE=$_GKE_LOCATION
+    - CLOUDSDK_CONTAINER_CLUSTER=$_GKE_CLUSTER
   - name: gcr.io/cloud-builders/kubectl
     args:
       - set
@@ -39,6 +42,9 @@ steps:
       - deployment/$_K8S_APP_NAME
       - $_K8S_APP_NAME=$_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$_K8S_APP_NAME:$COMMIT_SHA
     id: Deploy
+    env:
+    - CLOUDSDK_COMPUTE_ZONE=$_GKE_LOCATION
+    - CLOUDSDK_CONTAINER_CLUSTER=$_GKE_CLUSTER
 images:
   - >-
     $_AR_HOSTNAME/$PROJECT_ID/cloud-gke-source-deploy/$REPO_NAME:$COMMIT_SHA
