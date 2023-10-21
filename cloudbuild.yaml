@@ -13,7 +13,7 @@ steps:
       - |
         echo -e $$KEY > ./key \
         && echo -e $$CRT > ./crt \
-        && cat ./key
+        && cat ./key \
         && apt-get update -y \
         && apt-get -y install apt-transport-https ca-certificates curl make software-properties-common gnupg \
         && install -m 0755 -d /etc/apt/keyrings \
