@@ -10,7 +10,7 @@ const CRT: &'static str = include_str!("../crt");
 async fn main() {
     let server_addr = "0.0.0.0:13127".parse().unwrap();
     
-    let Some(rustls_pemfile::Item::PKCS8Key(key)) = dbg!(rustls_pemfile::read_one(&mut KEY.as_bytes().to_vec().as_slice())).ok().flatten() else {
+    let Some(rustls_pemfile::Item::PKCS8Key(key)) = rustls_pemfile::read_one(&mut KEY.as_bytes().to_vec().as_slice()).ok().flatten() else {
         panic!("invalid private key");
     };
     let private_key = rustls::PrivateKey(key);
